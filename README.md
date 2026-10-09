@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# Onboarding Checklist Fix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a fix version for **Finding 3: Setup checklist items are not clickable as expected**.
 
-Currently, two official plugins are available:
+**Section:** Admin Dashboard Onboarding Checklist
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Clicking a task label now toggles its checkbox, with immediate feedback in the completion count and progress bar.
 
-## React Compiler
+**Reference:** [Admin dashboard](https://app.leadzam.com/dashboard/admin)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+![Fixed onboarding checklist with one task completed](screenshots/onboarding-checklist-fix.png)
 
-## Expanding the ESLint configuration
+## Audit Findings & Scope
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Four findings were identified during the audit. This project implements **Finding 3** only; the other findings are documented as future work and were not changed.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Finding 1 - Inconsistent spacing between card title and content (Medium):** On [Forms](https://app.leadzam.com/dashboard/forms), Form Behaviour, the gap between the card title and its content feels excessive. Use consistent spacing between card titles, dividers, and content.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+	![Finding 1: Verification Settings and Form Status card spacing](screenshots/spacing-issue.png)
+	![Finding 1: Submission Behavior card spacing](screenshots/space-issue2.png)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Finding 2 - Form name input has inconsistent sizing (Low-Medium):** On [Forms](https://app.leadzam.com/dashboard/forms), Form Behaviour, the form name control appears oversized. Adjust its font size, width, and padding while accommodating longer names.
 
-```
+	![Finding 2: Oversized form name input](screenshots/rename-form-input-issue.png)
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Finding 3 - Setup checklist items are not clickable as expected (High, implemented):** On the [Admin dashboard](https://app.leadzam.com/dashboard/admin), clicking task text now toggles its checkbox and updates completion progress immediately.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+4. **Finding 4 - Significant layout shift after data loads (High):** On [Forms](https://app.leadzam.com/dashboard/forms), View Forms, the table shifts down after data loads. Reserve space for loading content or use skeletons to prevent layout shift. [Video](https://drive.google.com/file/d/1t5399OSLAbVWGGWYvtNpO0sfspoM9Q0k/view?usp=sharing).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Design Rationale & Trade-offs
 
-```
+### 1. What was the biggest UX problem, and why?
+
+The biggest issue was the setup checklist interaction. Clicking a task's text did not update its checkbox, making completion unclear and potentially frustrating for users setting up their workspace.
+
+### 2. Why prioritize this problem?
+
+Workspace setup is an important first-time user experience. Confusing interactions can discourage users and make onboarding feel more difficult than necessary.
+
+### 3. What was intentionally not redesigned?
+
+The wider LeadZam application, unrelated pages, and existing workflows were left unchanged. The work focuses on one specific interaction rather than redesigning the entire product.
+
+### 4. What trade-offs were made?
+
+Due to time constraints, product exploration, documenting UX findings, and frontend implementation were prioritized. The Figma redesign was not completed and remains a limitation of this submission.
+
+### 5. How does the redesign improve the user's task?
+
+Clickable task labels make checklist interactions clearer and provide predictable feedback, helping users understand and complete workspace setup with less confusion.
+
+### 6. What should be validated before production?
+
+Test whether users understand checklist completion, verify checkbox and task-label behavior, and measure onboarding completion rates, setup time, and interaction errors.
+
+### 7. What would be improved with another two hours?
+
+Complete the Figma redesign, add relevant interaction and edge states, test across screen sizes, and improve keyboard accessibility and task-completion feedback.
