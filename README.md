@@ -24,11 +24,11 @@ Four findings were identified during the audit. This project implements **Findin
 	![Finding 2: Oversized form name input](screenshots/rename-form-input-issue.png)
 
 3. **Finding 3 - Setup checklist items are not clickable as expected (High, implemented):** On the [Admin dashboard](https://app.leadzam.com/dashboard/admin), clicking task text now toggles its checkbox and updates completion progress immediately.
+   
 
-   <video controls preload="metadata" width="640">
-     <source src="video/short-video-demo.mov" type="video/quicktime">
-     Your browser does not support embedded video. [Watch the demo](video/short-video-demo.mov).
-   </video>
+https://github.com/user-attachments/assets/c4c1f537-3a75-48a1-a1c6-3c37bba451d3
+
+
 
 4. **Finding 4 - Significant layout shift after data loads (High):** On [Forms](https://app.leadzam.com/dashboard/forms), View Forms, the table shifts down after data loads. Reserve space for loading content or use skeletons to prevent layout shift. [Video](https://drive.google.com/file/d/1t5399OSLAbVWGGWYvtNpO0sfspoM9Q0k/view?usp=sharing).
 
